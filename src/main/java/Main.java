@@ -1,3 +1,8 @@
+/**
+ * Acknowledgement: Code template (Main, JobMapReduce) for running mapReduce jobs
+ * was developed within lab5 of BDM course on BDMA semester 2, taken place in UPC, Barcelona.
+ */
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.mapreduce.Job;

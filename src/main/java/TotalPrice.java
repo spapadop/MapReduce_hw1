@@ -48,12 +48,9 @@ public class TotalPrice extends JobMapReduce {
     }
 
     public boolean run() throws IOException, ClassNotFoundException, InterruptedException {
-        System.out.println("heyy");
         Configuration configuration = new Configuration();
-        // Define the new job and the name it will be given
         Job job = Job.getInstance(configuration, "TotalPrice");
         TotalPrice.configureJob(job, this.input, this.output);
-        // Let's run it!
         return job.waitForCompletion(true);
     }
 
