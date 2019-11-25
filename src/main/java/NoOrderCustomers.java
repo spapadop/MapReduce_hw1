@@ -35,18 +35,18 @@ public class NoOrderCustomers extends JobMapReduce {
 
     public static class NoOrderReducer extends Reducer<LongWritable, Text, Text, Text> {
         public void reduce(LongWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
-            Map<LongWritable,Text> out = new HashMap<>();
+            Map<LongWritable,Text> map = new HashMap<>();
             for (Text value : values) {
 //                System.out.println("Reducer evaluating\t" + key + "\t" + value);
                 if(value.toString().startsWith("o")){
-                    out.put(new LongWritable(0),new Text("found"));
+                    map.put(new LongWritable(0),new Text("found"));
                 } else {
-                    out.put(key, value);
+                    map.put(key, value);
                 }
             }
 
-            if(out.containsKey(key) && !out.containsKey(new LongWritable(0))){
-                context.write(out.get(key),out.get(key));
+            if(!map.containsKey(new LongWritable(0))){
+                context.write(map.get(key),map.get(key));
             }
 
         }
