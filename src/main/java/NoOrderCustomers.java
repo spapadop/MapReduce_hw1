@@ -33,7 +33,7 @@ public class NoOrderCustomers extends JobMapReduce {
         }
     }
 
-    public static class NoOrderReducer extends Reducer<LongWritable, Text, Text, Text> {
+    public static class NoOrderReducer extends Reducer<LongWritable, Text, Text, NullWritable> {
         public void reduce(LongWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
             Map<LongWritable,Text> map = new HashMap<>();
             for (Text value : values) {
@@ -46,7 +46,7 @@ public class NoOrderCustomers extends JobMapReduce {
             }
 
             if(!map.containsKey(new LongWritable(0))){
-                context.write(map.get(key),map.get(key));
+                context.write(map.get(key), NullWritable.get());
             }
 
         }
